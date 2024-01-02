@@ -1,0 +1,41 @@
+{% extends './base.html' %}
+{% block content %}
+        <div class="row mt-5">
+            <div class="col-6">
+                <h1 class="mb-5">Add a Book</h1>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label class="form-label">Title</label>
+                      {{form.title}}
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Description</label>
+                        {{form.description}}
+                    </div>
+                   
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+            <div class="col-6 p-3">
+                <table class="table p-5">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td scope="col">{{book.title}}</td>
+                        <td><a href="{% url 'books_authors_app0:details' pk=book.id %}" class="btn btn-link">View</a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+{% endblock content %}
